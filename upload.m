@@ -36,7 +36,7 @@ zip(zipfilename, classdir);
 
 %% Upload zip file.
 try     %#ok<TRYNC> 
-    svn('add', zipfilename);
+    [~] = svn('add', zipfilename);
 end
 svn('ci ', zipfilename, '-m ""');
 
