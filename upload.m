@@ -1,20 +1,37 @@
-function upload
+function upload(varargin)
+
+%%
+%       SYNTAX: upload(zipfilename);
+%               upload(zipfilename, classdir);
+%
+%  DESCRIPTION: Zip and upload class folder (e.g. c:\class) onto GitHub.
+%
+%        INPUT: - zipfilename (char)
+%                   Zip filename.
+%
+%               - classdir (char)
+%                   Class folder. Optional. Default = 'c:\class'.
+%
+%       OUTPUT: none.
 
 
-%% Zip everything under c:\class
-d = fileparts(mfilename('fullpath'));
-switch getenv('COMPUTERNAME')
-case 'AH-KHUNG-NEW'
-    f = 'kevin.zip';
-case 'AH-NLONGO-NEW'
-    f = 'nick.zip';
-case 'KEVINHP2021'
-    f = 'kevin-personal.zip';
-otherwise
-    error('Invalid computername.');
+%% Assign input arguments.
+classdir = 'c:\class';
+switch nargin
+case 1
+    zipfilename = varargin{1};
+case 2
+    zipfilename = varargin{1};
+    classdir    = varargin{2};
+otherwise    
+    error('Invalid number of input arguments.');
 end
-zipfilename = fullfile(d, f);
-zip(zipfilename, 'c:\class')
+
+
+%% Create zip file.
+folder      = fileparts(mfilename('fullpath'));
+zipfilename = fullfile(folder, zipfilename);
+zip(zipfilename, classdir);
 
 
 % %% svn update.
