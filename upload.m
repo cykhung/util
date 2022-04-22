@@ -33,7 +33,6 @@ end
 folder          = fileparts(mfilename('fullpath'));
 zipfilename_abs = fullfile(folder, zipfilename);
 zip(zipfilename_abs, classdir);
-% fprintf('Zip up all files under "%s" in %s.\n', classdir, zipfilename);
 
 
 %% Upload zip file.
@@ -41,7 +40,6 @@ try     %#ok<TRYNC>
     [~] = svn('add', zipfilename_abs);
 end
 [~] = svn('ci ', zipfilename_abs, '-m ""');
-% fprintf('Upload %s to GitHub.\n', zipfilename);
 
 
 %%
