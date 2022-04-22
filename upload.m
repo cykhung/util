@@ -34,14 +34,9 @@ zipfilename = fullfile(folder, zipfilename);
 zip(zipfilename, classdir);
 
 
-% %% svn update.
-% d = fileparts(mfilename('fullpath'));
-% svn('update ', d);
-
-
-%% svn commit zipfile.
+%% Upload zip file.
 try     %#ok<TRYNC> 
-    r = svn('add', zipfilename);
+    svn('add', zipfilename);
 end
 svn('ci ', zipfilename, '-m ""');
 
